@@ -1,0 +1,2 @@
+# Js2TsChangeCase
+记录JS修改TS过程中遇到一些有意思的改造过程
