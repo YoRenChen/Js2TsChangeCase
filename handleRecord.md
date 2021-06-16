@@ -27,3 +27,12 @@ export const arrayToTree = <T extends arrayToTreeType>(data: T[], rootPid: strin
   return tree
 }
 ```
+#### 类型判断
+- msec属性类型由timestamp决定，所有ts判断时需要根据入参进行判断
+```
+type RealMsToDate<T> = T extends true ? number | string : Date
+
+export const msToDate = (msec: number | string | Date, timestamp: boolean = true): string => {
+    const dateTime: Date = timestamp ? (String(msec).length === 10 ? new Date(`${msec}000`) : new Date(msec)) : msec as RealMsToDate<typeof timestamp>
+}
+```
