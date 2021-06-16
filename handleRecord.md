@@ -17,8 +17,8 @@ export const arrayToTree = (data, rootPid, idStr) => {
   return tree
 }
 ```
-- 用泛型把值约束在范围之内，内部范围只属于传递过来的参数决定
-- 一来可以明确 输出，而来可以避免歧义
+1. 用泛型把值约束在范围之内，内部范围只属于传递过来的参数决定
+2. 一来可以明确 输出，而来可以避免歧义
     (x: number | string): number | string => <T extends number | string>(x: T): T
 ```
 type arrayToTreeType = {
@@ -46,7 +46,12 @@ export const arrayToTree = <T extends arrayToTreeType>(data: T[], rootPid: strin
 }
 ```
 #### 类型判断
-- msec属性类型由timestamp决定，所有ts判断时需要根据入参进行判断
+```
+export const msToDate = (msec, timestamp = true) => {
+    const dateTime = timestamp ? (String(msec).length === 10 ? new Date(`${msec}000`) : new Date(msec)) : msec
+}
+```
+1. msec 属性的类型由 timestamp 决定，所有 ts 判断时需要根据入参进行判断
 
 ```
 type RealMsToDate<T> = T extends true ? number | string : Date
