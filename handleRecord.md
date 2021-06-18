@@ -60,3 +60,29 @@ export const msToDate = (msec: number | string | Date, timestamp: boolean = true
     const dateTime: Date = timestamp ? (String(msec).length === 10 ? new Date(`${msec}000`) : new Date(msec)) : msec as RealMsToDate<typeof timestamp>
 }
 ```
+
+#### 赋值类型收窄
+
+由于属性范围太广，导致在取值时发生不一致。
+```
+type repCode = any // 不可改
+
+const CODE = {1001: 'A', 1002: 'B'}
+function A(repCode: repCode) {
+    if (repCode) {
+        const responseCode = repCode
+        CODE[responseCode]  // 报错
+    }
+}
+```
+修改：
+```
+1. 给 CODE 定义
+declare type errorCodeType = {
+  [key: number]: string;
+}
+
+2. 对 responseCode 范围进行收窄
+- CODE[responseCode as keyof typeof CODE]
+-  const responseCode: keyof typeof CODE = repCode
+```
