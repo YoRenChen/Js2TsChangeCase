@@ -87,3 +87,18 @@ declare type errorCodeType = {
 - CODE[responseCode as keyof typeof CODE]
 -  const responseCode: keyof typeof CODE = repCode
 ```
+
+#### 跨类型
+1. arguments类型为 IArguments ；
+2. apply接受类型为 []
+```
+function (func: () => void) {
+    return function (this: any) {
+        const arr = arguments
+        func.apply(this, arr)
+    }  
+}
+=> 
+const arr = Array.from(arguments)
+func.apply(this, arr as [])
+```
