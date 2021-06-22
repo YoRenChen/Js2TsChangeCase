@@ -102,3 +102,4 @@ function (func: () => void) {
 const arr = Array.from(arguments)
 func.apply(this, arr as [])
 ```
+### 可能遇到的问题
