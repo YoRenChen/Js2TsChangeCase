@@ -103,3 +103,11 @@ const arr = Array.from(arguments)
 func.apply(this, arr as [])
 ```
 ### 可能遇到的问题
+1. 配置tsconfig支持: "moduleResolution": "node", 模块解析
+```
+# main.ts
+
+// Cannot find module 'vue'. Did you mean to set the 'moduleResolution' option to 'node', or to add aliases to the 'paths' option?ts(2792)
+
+import Vue from 'vue'
+```
